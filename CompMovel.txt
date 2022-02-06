@@ -1,0 +1,18 @@
+Recomendações
+
+Quantidades *(Mostrar quantidades existentes)
+Localoza;ao de produtos
+Control de stok
+Fornecedor e data de entrada e caducidade
+
+
+Mostrar o user logado(Gestãoo de Acesso)
+Relatorios
+Buscas
+Layout
+
+
+
+User--Loja
+Formulario user
+Níveis de acesso
