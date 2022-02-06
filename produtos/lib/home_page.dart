@@ -20,8 +20,6 @@ class _HomePageState extends State<HomePage> {
     final products = context.watch<ProductController>();
     FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
-    final user = context.watch<UserController>();
-    user.loadCurrentUser(firebaseAuth.currentUser!.uid);
     String userLogado = firebaseAuth.currentUser!.email ?? "";
     return Scaffold(
         appBar: AppBar(
@@ -92,15 +90,13 @@ class _HomePageState extends State<HomePage> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
-                                  if (user.admin)
-                                    GestureDetector(
-                                        onTap: () {
-                                          showMyDialog(
-                                              product: product,
-                                              context: context);
-                                        },
-                                        child: const Icon(Icons.edit,
-                                            size: 20, color: Colors.grey)),
+                                  GestureDetector(
+                                      onTap: () {
+                                        showMyDialog(
+                                            product: product, context: context);
+                                      },
+                                      child: const Icon(Icons.edit,
+                                          size: 20, color: Colors.grey)),
                                   const SizedBox(height: 10),
                                   Text("KZ ${product.price}"),
                                 ],
@@ -137,15 +133,13 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
         ),
-        floatingActionButton: user.admin
-            ? FloatingActionButton(
-                backgroundColor: Colors.white,
-                child: const Icon(Icons.add, color: Colors.black),
-                onPressed: () {
-                  Product product = Product();
-                  showMyDialog(product: product, context: context);
-                },
-              )
-            : Container());
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.white,
+          child: const Icon(Icons.add, color: Colors.black),
+          onPressed: () {
+            Product product = Product();
+            showMyDialog(product: product, context: context);
+          },
+        ));
   }
 }
