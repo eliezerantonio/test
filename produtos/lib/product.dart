@@ -13,6 +13,7 @@ class Product with ChangeNotifier {
   num? price;
   int? qty;
   String? inputTime;
+  String? uid;
 
   Product(
       {this.title,
@@ -21,6 +22,7 @@ class Product with ChangeNotifier {
       this.filename,
       this.expiry,
       this.price,
+      this.uid,
       this.qty,
       this.provider,
       this.inputTime,
@@ -36,6 +38,7 @@ class Product with ChangeNotifier {
     type = data['type'];
     description = data['description'];
     filename = data['filename'];
+    uid = data['uid'];
     created = data["created"];
     expiry = data["expiry"];
     price = data['price'];
@@ -48,6 +51,7 @@ class Product with ChangeNotifier {
     type = json['type'];
     description = json['description'];
     filename = json['filename'];
+    uid = json['uid'];
     expiry = json['expiry'];
     created = json["created"];
     inputTime = json["inputTime"];
@@ -55,12 +59,13 @@ class Product with ChangeNotifier {
   }
 
   Map<String, dynamic> toMap() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = Map<String, dynamic>();
     data['title'] = title;
     data['type'] = type;
     data['description'] = description;
     data['filename'] = filename;
     data['expiry'] = expiry;
+    data['uid'] = uid;
     data['provider'] = provider;
     data["created"] = Timestamp.now();
     data["inputTime"] = inputTime;

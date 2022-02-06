@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:produtos/controller/product_controller.dart';
 import 'package:produtos/product.dart';
@@ -10,6 +11,8 @@ Future<void> showMyDialog(
   void updateList() {
     context.read<ProductController>().getProducts();
   }
+
+  FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
   return showDialog<void>(
     context: context,
@@ -184,8 +187,10 @@ Future<void> showMyDialog(
           actions: <Widget>[
             TextButton(
               child: Text("Salvar"),
-              onPressed: () {
+              onPressed: () async {
+                String userLogado = firebaseAuth.currentUser!.uid;
                 if (!formState.currentState!.validate()) return;
+                product.uid = userLogado;
                 formState.currentState!.save();
                 product.save();
                 updateList();

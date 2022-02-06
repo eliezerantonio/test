@@ -28,6 +28,7 @@ class _HomePageState extends State<HomePage> {
             IconButton(
               onPressed: () async {
                 await firebaseAuth.signOut();
+                products.products.clear();
                 Navigator.pushReplacement(
                     context, MaterialPageRoute(builder: (_) => LoginPage()));
               },
@@ -69,7 +70,7 @@ class _HomePageState extends State<HomePage> {
                           children: [
                             ListTile(
                               leading: Image.asset(
-                                "assets/images/${product.filename!}",
+                                "assets/images/${product.filename!}.jpg",
                                 fit: BoxFit.cover,
                                 width: 100,
                                 height: 200,

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'dart:async';
@@ -14,6 +15,7 @@ class ProductController with ChangeNotifier {
   }
 
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
+    FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
   bool _loading = false;
   List<Product> products = [];
@@ -34,7 +36,8 @@ class ProductController with ChangeNotifier {
   //metodo para busca produtos no firebase
 
   Future<void> getProducts() async {
-    final QuerySnapshot snapshot = await firestore.collection("products").get();
+      String userLogado = firebaseAuth.currentUser!.uid;
+    final QuerySnapshot snapshot = await firestore.collection("products").where("uid", isEqualTo: userLogado).get();
 
     products = snapshot.docs.map((e) => Product.fromDocument(e)).toList();
 
